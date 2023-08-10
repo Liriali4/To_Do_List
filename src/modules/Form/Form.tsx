@@ -4,6 +4,13 @@ import TaskInput from "./Components/TaskInput";
 import TaskButton from "./Components/TaskButton";
 import { useTaskStore } from "../../State";
 
+type Task = {
+    id: number;
+    name: string;
+    category: string;
+    completed: boolean;
+};
+
 export default function Form(): JSX.Element {
     const [newTask, setNewTask] = useState({ taskText: '', category: '' });
     const addTask = useTaskStore((state) => state.addTask);
@@ -11,8 +18,15 @@ export default function Form(): JSX.Element {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (newTask.taskText.trim() !== '' && newTask.category.trim() !== '') {
-            addTask(newTask.taskText, newTask.category);
+            const taskToAdd: Task = {
+                id: Date.now(),
+                name: newTask.taskText,
+                category: newTask.category,
+                completed: false,
+            };
+            addTask(taskToAdd);
             setNewTask({ taskText: '', category: '' });
+            console.log("New Task Object:", taskToAdd);
         }
     };
 

@@ -9,7 +9,7 @@ export default function TaskList() {
   return (
     <UnorderedList>
       {tasks.map((task, index) => (
-        <ListItem key={index}>{task.text}</ListItem>
+        <ListItem key={index}>{task.name}</ListItem>
       ))}
     </UnorderedList>
   );
