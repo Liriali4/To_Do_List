@@ -1,17 +1,17 @@
 // TaskList.js
 import React from 'react';
-import { ListItem, UnorderedList,} from '@chakra-ui/react'
-import { useTaskStore } from '../../State';
+import { ListItem, UnorderedList, } from '@chakra-ui/react'
+import { StorageEnum, getData } from '../../DataBase/LocalStorageDao';
 
 export default function TaskList() {
-  const tasks = useTaskStore((state) => state.tasks);
+    const Tasks = getData(StorageEnum.Task) || [];
 
-  return (
-    <UnorderedList>
-      {tasks.map((task, index) => (
-        <ListItem key={index}>{task.name}</ListItem>
-      ))}
-    </UnorderedList>
-  );
+    return (
+        <UnorderedList>
+            {Tasks.map((task: any, index: any) => (
+                <ListItem key={index}>{task.name}</ListItem>
+            ))}
+        </UnorderedList>
+    );
 }
 

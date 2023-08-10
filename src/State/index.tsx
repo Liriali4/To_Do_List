@@ -7,6 +7,11 @@ type Task = {
   category: string;
 };
 
+type Category = {
+  name: string;
+  position: string;
+};
+
 type TaskStore = {
   tasks: Task[];
   addTask: (task: Task) => void;
@@ -15,15 +20,15 @@ type TaskStore = {
 };
 
 type CategoryStore = {
-  categories: string[];
-  addCategory: (category: string) => void;
+  categories: Category[];
+  addCategory: (category: Category) => void;
 };
 
 export const useTaskStore = create<TaskStore>((set) => ({
   tasks: [],
   addTask: (task) =>
     set((state) => ({
-      tasks: [...state.tasks, task], // Use a tarefa passada como argumento
+      tasks: [...state.tasks, task],
     })),
   markTaskCompleted: (taskId) =>
     set((state) => ({
@@ -34,5 +39,10 @@ export const useTaskStore = create<TaskStore>((set) => ({
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
   categories: [],
-  addCategory: (category) => set((state) => ({ categories: [...state.categories, category] })),
+  addCategory: (category) =>
+    set((state) => ({
+      categories: [...state.categories, category],
+    })),
 }));
+
+

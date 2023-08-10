@@ -3,6 +3,7 @@ import { Text } from "@chakra-ui/react";
 import TaskInput from "./Components/TaskInput";
 import TaskButton from "./Components/TaskButton";
 import { useTaskStore } from "../../State";
+import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 
 type Task = {
     id: number;
@@ -11,27 +12,31 @@ type Task = {
     completed: boolean;
 };
 
-export default function Form(): JSX.Element {
-    const [newTask, setNewTask] = useState({ taskText: '', category: '' });
+export default function FormOfTasks(): JSX.Element {
+    const [newTask, setNewTask] = useState({ task: '', category: '' });
     const addTask = useTaskStore((state) => state.addTask);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        if (newTask.taskText.trim() !== '' && newTask.category.trim() !== '') {
+        if (newTask.task.trim() !== '' && newTask.category.trim() !== '') {
             const taskToAdd: Task = {
                 id: Date.now(),
-                name: newTask.taskText,
+                name: newTask.task,
                 category: newTask.category,
                 completed: false,
             };
             addTask(taskToAdd);
-            setNewTask({ taskText: '', category: '' });
+            
+            const existingTasks = getData(StorageEnum.Task) || [];
+            const updatedTasks = [...existingTasks, taskToAdd];
+            saveData(StorageEnum.Task, updatedTasks);
             console.log("New Task Object:", taskToAdd);
+            setNewTask({ task: '', category: '' });
         }
     };
 
-    const handleTaskTextChange = (value: string) => {
-        setNewTask((prevTask) => ({ ...prevTask, taskText: value }));
+    const handleTaskChange = (value: string) => {
+        setNewTask((prevTask) => ({ ...prevTask, task: value }));
     };
 
     const handleCategoryChange = (value: string) => {
@@ -44,8 +49,8 @@ export default function Form(): JSX.Element {
             <TaskInput
                 label="Task:"
                 style={{ marginBottom: "10px" }}
-                onChange={handleTaskTextChange}
-                value={newTask.taskText}
+                onChange={handleTaskChange}
+                value={newTask.task}
             />
             <TaskInput
                 label="Category:"
