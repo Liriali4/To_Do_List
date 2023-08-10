@@ -1,4 +1,3 @@
-// TaskList.js
 import React from 'react';
 import { ListItem, UnorderedList, } from '@chakra-ui/react'
 import { StorageEnum, getData } from '../../DataBase/LocalStorageDao';

@@ -1,15 +1,11 @@
-// No arquivo AddCategory.tsx
 import React, { useState } from "react";
 import { Text } from "@chakra-ui/react";
 import TaskInput from "../Form/Components/TaskInput";
 import TaskButton from "../Form/Components/TaskButton";
-import { useCategoryStore } from "../../State";
+import { useCategoryStore } from "../../State/zustand";
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
+import { Category } from "../../types/allTypes";
 
-type Category = {
-    name: string;
-    position: string;
-};
 
 export default function AddCategory(): JSX.Element {
 

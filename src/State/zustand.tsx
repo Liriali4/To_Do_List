@@ -1,16 +1,5 @@
 import create from 'zustand';
-
-type Task = {
-  id: number;
-  name: string;
-  completed: boolean;
-  category: string;
-};
-
-type Category = {
-  name: string;
-  position: string;
-};
+import { Category, Task } from '../types/allTypes';
 
 type TaskStore = {
   tasks: Task[];

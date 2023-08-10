@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text } from "@chakra-ui/react";
 import TaskInput from "./Components/TaskInput";
 import TaskButton from "./Components/TaskButton";
-import { useTaskStore } from "../../State";
+import { useTaskStore } from "../../State/zustand";
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 
 type Task = {
@@ -26,7 +26,7 @@ export default function FormOfTasks(): JSX.Element {
                 completed: false,
             };
             addTask(taskToAdd);
-            
+
             const existingTasks = getData(StorageEnum.Task) || [];
             const updatedTasks = [...existingTasks, taskToAdd];
             saveData(StorageEnum.Task, updatedTasks);
