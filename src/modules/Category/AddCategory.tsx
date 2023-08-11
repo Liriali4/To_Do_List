@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text } from "@chakra-ui/react";
-import TaskInput from "../Form/Components/TaskInput";
-import TaskButton from "../Form/Components/TaskButton";
+import TaskInput from "../../Components/TaskInput";
+import TaskButton from "../../Components/TaskButton";
 import { useCategoryStore } from "../../State/zustand";
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 import { Category } from "../../types/allTypes";

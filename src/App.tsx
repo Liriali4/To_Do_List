@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import Task from './Screen/Task';
+import Home from './Screen/home';
 
 function App(): JSX.Element {
   return (
     <Box>
-      <Task/>
+      <Home/>
     </Box>
   );
 }
