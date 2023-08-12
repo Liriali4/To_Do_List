@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
 import { useCategoryStore } from "../../State/zustand";
@@ -10,7 +10,7 @@ import { Category } from "../../types/allTypes";
 export default function AddCategory(): JSX.Element {
 
     const [newCategory, setNewCategory] = useState<Category>({ name: '', position: '' });
-    const addCategory = useCategoryStore((state) => state.addCategory);
+    const addCategory = useCategoryStore((state: { addCategory: any; }) => state.addCategory);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -31,24 +31,42 @@ export default function AddCategory(): JSX.Element {
     };
 
     return (
-        <>
-            <Text>Adicione uma nova categoria.</Text>
+        <Flex
+            flexDir={'column'}
+            justify={'space-around'}
+            borderRadius={'10px'}
+            boxShadow="2px 2px #ddd"
+            bg={'branco.unico'}
+            p={'0 10px'}
+            w='365px'
+            h={'360px'}>
+            <Text
+                fontSize={'24px'}
+                fontWeight={'600'}
+                color={'roxo.escuro'}
+            >
+                Adicione uma nova categoria.</Text>
             <TaskInput
-                label="Category Name:"
-                style={{ marginBottom: "10px" }}
+                label="Nome:"
                 onChange={handleCategoryNameChange}
                 value={newCategory.name}
             />
             <TaskInput
-                label="Category position:"
-                style={{ marginBottom: "10px" }}
+                label="Posição:"
                 onChange={handleCategoryPositionChange}
                 value={newCategory.position}
             />
+            <Box
+                display={'flex'}
+                justifyContent={'center'}
+                alignContent={"center"}
+                w={'100%'}
+            >
             <TaskButton
                 label="Add Category"
                 onClick={handleSubmit}
             />
-        </>
+            </Box>
+        </Flex >
     )
 }
