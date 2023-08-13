@@ -95,7 +95,7 @@ export default function Sidebar() {
                             size={23} />
                         <Text
                             p="0 6px 0"
-                        >Adicionar Categoria</Text>
+                        >Add Categoria</Text>
                     </Flex>
                 </Link>
 
@@ -124,7 +124,35 @@ export default function Sidebar() {
                         />
                         <Text
                             p="0 10px 0"
-                        >Adicionar Tarefas</Text>
+                        >Add Tarefas</Text>
+                    </Flex>
+                </Link>
+                <Link
+                    to='/completedtask'
+                >
+                    <Flex
+                        display="flex"
+                        align="center"
+                        w="100%"
+                        h="45px"  
+                        textDecoration="none"
+                        color={location.pathname === "/completedtask" ? " #FF0080" : "#FF0080"}
+                        bg={location.pathname === "/completedtask" ? "rgb(235, 235, 235)" : ""}
+                        fontWeight={location.pathname === "/completedtask" ? "700" : "500"}
+                        fontSize="16px"
+                        p="20px 20px 20px"
+                        _hover={{
+                            bg: "cinza.fundo",
+                            fontWeight: "700"
+                        }}
+                    >
+                        <FiPlusSquare
+                            size={23}
+                            color="cinza.sidebar"
+                        />
+                        <Text
+                            p="0 10px 0"
+                        >Tarefas feitas</Text>
                     </Flex>
                 </Link>
                 <Button

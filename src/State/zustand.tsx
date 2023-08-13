@@ -1,16 +1,16 @@
 import create from 'zustand';
-import { Category, Task } from '../types/allTypes';
+import { CategoryType, TaskType } from '../types/allTypes';
 
 type TaskStore = {
-  tasks: Task[];
-  addTask: (task: Task) => void;
+  tasks: TaskType[];
+  addTask: (task: TaskType) => void;
   markTaskCompleted: (taskId: number) => void;
   removeTask: (taskId: number) => void;
 };
 
 type CategoryStore = {
-  categories: Category[];
-  addCategory: (category: Category) => void;
+  categories: CategoryType[];
+  addCategory: (category: CategoryType) => void;
 };
 
 export const useTaskStore = create<TaskStore>((set) => ({

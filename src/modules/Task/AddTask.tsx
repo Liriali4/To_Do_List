@@ -5,15 +5,8 @@ import TaskButton from "../../Components/TaskButton";
 import { useTaskStore } from "../../State/zustand";
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 import Select from 'react-select';
-import { Category } from "../../types/allTypes";
+import { CategoryType, TaskType } from "../../types/allTypes";
 import Sidebar from "../../Components/sideBar";
-
-type Task = {
-    id: number;
-    name: string;
-    category: string;
-    completed: boolean;
-};
 
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');
@@ -27,7 +20,7 @@ export default function AddTask(): JSX.Element {
         e.preventDefault();
         if (newTask !== '' && newCategory !== null) {
             let category = newCategory.value
-            const taskToAdd: Task = {
+            const taskToAdd: TaskType = {
                 id: Date.now(),
                 name: newTask,
                 category: category,
@@ -53,7 +46,7 @@ export default function AddTask(): JSX.Element {
         setNewCategory(option);
     };
 
-    const options = categories.map((name: Category) => ({
+    const options = categories.map((name: CategoryType) => ({
         value: name.name,
         label: name.name
     }));

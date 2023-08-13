@@ -4,12 +4,12 @@ import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
 import { useCategoryStore } from "../../State/zustand";
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
-import { Category } from "../../types/allTypes";
+import { CategoryType } from "../../types/allTypes";
 
 
 export default function AddCategory(): JSX.Element {
 
-    const [newCategory, setNewCategory] = useState<Category>({ name: '', position: '' });
+    const [newCategory, setNewCategory] = useState<CategoryType>({ name: '', position: '' });
     const addCategory = useCategoryStore((state: { addCategory: any; }) => state.addCategory);
 
     const handleSubmit = (e: any) => {
