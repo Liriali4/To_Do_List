@@ -1,7 +1,8 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { FiGrid, FiPlusSquare, FiLogOut } from 'react-icons/fi'
+import {  FiPlusSquare, FiLogOut } from 'react-icons/fi'
+import { FaHistory, FaListUl } from 'react-icons/fa'
 
 
 export default function Sidebar() {
@@ -65,7 +66,7 @@ export default function Sidebar() {
                             fontWeight: "700"
                         }}
                     >
-                        <FiGrid
+                        <FaListUl
                             size={23} />
                         <Text
                             p="0 6px 0"
@@ -128,7 +129,7 @@ export default function Sidebar() {
                     </Flex>
                 </Link>
                 <Link
-                    to='/completedtask'
+                    to='/historicoftasks'
                 >
                     <Flex
                         display="flex"
@@ -136,9 +137,9 @@ export default function Sidebar() {
                         w="100%"
                         h="45px"  
                         textDecoration="none"
-                        color={location.pathname === "/completedtask" ? " #FF0080" : "#FF0080"}
-                        bg={location.pathname === "/completedtask" ? "rgb(235, 235, 235)" : ""}
-                        fontWeight={location.pathname === "/completedtask" ? "700" : "500"}
+                        color={location.pathname === "/historicoftasks" ? " #FF0080" : "#FF0080"}
+                        bg={location.pathname === "/historicoftasks" ? "rgb(235, 235, 235)" : ""}
+                        fontWeight={location.pathname === "/historicoftasks" ? "700" : "500"}
                         fontSize="16px"
                         p="20px 20px 20px"
                         _hover={{
@@ -146,13 +147,13 @@ export default function Sidebar() {
                             fontWeight: "700"
                         }}
                     >
-                        <FiPlusSquare
+                        <FaHistory
                             size={23}
                             color="cinza.sidebar"
                         />
                         <Text
                             p="0 10px 0"
-                        >Tarefas feitas</Text>
+                        >Histórico</Text>
                     </Flex>
                 </Link>
                 <Button

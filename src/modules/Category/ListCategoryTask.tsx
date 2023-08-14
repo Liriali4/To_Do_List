@@ -1,10 +1,16 @@
-import React from "react";
-import { Text, Box, UnorderedList, ListItem, VStack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Text, Box } from "@chakra-ui/react";
 import { StorageEnum, getData } from "../../DataBase/LocalStorageDao";
+import { CategoryType } from "../../types/allTypes";
 
 export default function CategoryOfTask(): JSX.Element {
 
-    const categories = getData(StorageEnum.Category) || [];
+    const [categories, setCategories] = useState<CategoryType[]>([]);
+
+    useEffect(() => {
+        const data = getData(StorageEnum.Category) || [];
+        setCategories(data);
+    }, []);
 
     return (
         <Box
@@ -23,10 +29,10 @@ export default function CategoryOfTask(): JSX.Element {
             >Categorias existentes:</Text>
             <Box>
                 {categories.map((category: any, index: any) => (
-                    <Text 
-                    p={'10px 20px'} 
-                    borderBottom={'2px solid #FF0080'}
-                    key={index}>{category.name}</Text>
+                    <Text
+                        p={'10px 20px'}
+                        borderBottom={'2px solid #FF0080'}
+                        key={index}>{category.name}</Text>
                 ))}
             </Box>
         </Box>

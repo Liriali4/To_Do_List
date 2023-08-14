@@ -32,7 +32,9 @@ export default function TaskList() {
         saveData(StorageEnum.Task, tasksWithoutDeleted);
         setTasks(tasksWithoutDeleted);
 
-        saveData(StorageEnum.CompletedTask, task);
+        const existingTasks = getData(StorageEnum.CompletedTask) || [];
+        const updatedTasks = [...existingTasks, task];
+        saveData(StorageEnum.CompletedTask, updatedTasks);
     }
 
     return (
@@ -62,7 +64,12 @@ export default function TaskList() {
                     >
                         <Text
                             p={'10px 20px'}
-                            key={index}># {index + 1}</Text>
+                            key={index}
+                            style={{
+                                fontStyle: task.completed ? 'italic' : 'normal',
+                                color: task.completed ? '#555' : 'black',
+                            }}
+                            ># {index + 1}</Text>
                         <Text
                             w={'70%'}
                             p={'10px 10px'}
