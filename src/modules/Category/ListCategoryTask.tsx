@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Text, Box } from "@chakra-ui/react";
-import { StorageEnum, getData } from "../../DataBase/LocalStorageDao";
+import { Text, Box, Flex } from "@chakra-ui/react";
+import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 import { CategoryType } from "../../types/allTypes";
+import { FiTrash } from "react-icons/fi";
 
 export default function CategoryOfTask(): JSX.Element {
 
@@ -12,6 +13,15 @@ export default function CategoryOfTask(): JSX.Element {
         setCategories(data);
     }, []);
 
+    function removecategory(category: CategoryType) {
+        console.log("eliminado")
+
+        const categoreisWithoutDeleted = categories.filter((c: CategoryType) => c.name !== category.name);
+        saveData(StorageEnum.Category, categoreisWithoutDeleted);
+        setCategories(categoreisWithoutDeleted);
+
+    }
+
     return (
         <Box
             borderRadius={'10px'}
@@ -19,7 +29,7 @@ export default function CategoryOfTask(): JSX.Element {
             bg={'branco.unico'}
             w={'360px'}
             h={'400px'}
-            p={'10px'}
+            p={'10px 20px'}
         >
             <Text
                 fontSize={'24px'}
@@ -27,12 +37,24 @@ export default function CategoryOfTask(): JSX.Element {
                 color={'roxo.escuro'}
                 m={'10px 0'}
             >Categorias existentes:</Text>
-            <Box>
+            <Box >
                 {categories.map((category: any, index: any) => (
-                    <Text
-                        p={'10px 20px'}
+                    <Flex
+                        justify={'space-between'}
+                        align={'center'}
+                            p={'10px'}
                         borderBottom={'2px solid #FF0080'}
-                        key={index}>{category.name}</Text>
+                        w={'100%'}
+                    >
+                        <Text
+                            key={index}>{category.name}</Text>
+
+                        <FiTrash
+                            size={15}
+                            color="#7928CA"
+                            onClick={() => removecategory(category)}
+                        />
+                    </Flex>
                 ))}
             </Box>
         </Box>
