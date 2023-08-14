@@ -16,7 +16,7 @@ export default function Category() {
         >
             <Sidebar />
             <Flex
-                ml={'15%'}
+                ml={'25%'}
                 h={'100vh'}
                 justify={'center'}
                 align={'center'}

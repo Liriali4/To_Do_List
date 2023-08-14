@@ -72,8 +72,8 @@ export default function AddTask(): JSX.Element {
                     borderRadius={'10px'}
                     boxShadow="2px 2px #ddd"
                     p={'15px'}
-                    w={'360px'}
-                    h={'360px'}
+                    w={'460px'}
+                    h={'460px'}
                     bg={'branco.unico'}
                 >
                     <Text

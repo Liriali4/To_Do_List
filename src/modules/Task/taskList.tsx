@@ -48,7 +48,7 @@ export default function TaskList() {
             p={'20px'}
         >
             <Text
-                fontSize={'24px'}
+                fontSize={'28px'}
                 fontWeight={'600'}
                 color={'roxo.escuro'}
                 m={'10px 0'}

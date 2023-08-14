@@ -49,7 +49,7 @@ export default function Historic() {
                 >
                     <Flex p={'0 20px'} justify={'space-between'} align={'center'} w={'100%'}>
                         <Text
-                            fontSize={'24px'}
+                            fontSize={'28px'}
                             fontWeight={'600'}
                             color={'roxo.escuro'}
                             m={'10px 0'}
