@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import Home from './Screens/home';
 import { theme } from './Themes/themes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

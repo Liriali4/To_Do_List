@@ -3,6 +3,7 @@ const storage = window.localStorage;
 export enum StorageEnum {
 	Task = 'tarefas',
 	Category = 'categorias',
+	CompletedTask = 'tarefasFeitas',
 }
 
 export function saveData(key: string, data: any) {
