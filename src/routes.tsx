@@ -5,7 +5,7 @@ import { theme } from './Themes/themes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Screens/login';
 import PageNotFound from './Screens/PageNotFound';
-import Category from './modules/Category/category';
+import Category from './Screens/category';
 import AddTask from './modules/Task/AddTask';
 import Historic from './modules/Historic/historic';
 

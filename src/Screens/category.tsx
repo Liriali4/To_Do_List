@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import AddCategory from "./AddCategory";
-import CategoryOfTask from "./ListCategoryTask";
-import Sidebar from '../../Components/sideBar';
+import AddCategory from "../modules/Category/AddCategory";
+import CategoryOfTask from "../modules/Category/ListCategoryTask";
+import Sidebar from '../Components/sideBar';
 
 
 export default function Category() {
