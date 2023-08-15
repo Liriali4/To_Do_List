@@ -4,8 +4,7 @@ import { CategoryType, TaskType } from '../types/allTypes';
 type TaskStore = {
   tasks: TaskType[];
   addTask: (task: TaskType) => void;
-  markTaskCompleted: (taskId: number) => void;
-  removeTask: (taskId: number) => void;
+  setTasks: (task: TaskType[]) => void;
 };
 
 type CategoryStore = {
@@ -20,16 +19,15 @@ export const useTaskStore = create<TaskStore>((set) => ({
     set((state) => ({
       tasks: [...state.tasks, task],
     })),
-  markTaskCompleted: (taskId) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) => (task.id === taskId ? { ...task, completed: true } : task)),
-    })),
-  removeTask: (taskId) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== taskId) })),
+    setTasks: (tasks) =>
+      set((state) => ({
+        tasks,
+      })),
 }));
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
   categories: [],
-  setCategories: (categories) => // Implemente a lógica para definir as categorias aqui
+  setCategories: (categories) =>
     set((state) => ({
       categories,
     })),

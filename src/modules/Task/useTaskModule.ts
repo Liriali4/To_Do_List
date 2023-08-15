@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { TaskType } from '../../types/allTypes';
 import { ItemModuleContract } from '../../Contracts/conctract';
 import { StorageEnum, deleteData, editData, getData, saveData } from '../../DataBase/LocalStorageDao';
+import { useTaskStore } from '../../State/zustand';
 
 export function useTaskModule(): ItemModuleContract<TaskType> {
   const [tasks, setTasks] = useState<TaskType[]>([]);
+  
+  const setTasksState = useTaskStore(state => state.setTasks);
 
   const addItem = (taskToAdd: TaskType) => {
     setTasks([...tasks, taskToAdd]);
@@ -21,10 +24,11 @@ export function useTaskModule(): ItemModuleContract<TaskType> {
   const deleteItem = (task: TaskType, allTask: TaskType[]) => {
     const tasksWithoutDeleted = allTask.filter((t: TaskType) => t.id !== task.id);
     saveData(StorageEnum.Task, tasksWithoutDeleted);
+    setTasksState(tasksWithoutDeleted)
 
-    const existingTasks = getData(StorageEnum.CompletedTask) || [];
-    const updatedTasks = [...existingTasks, task];
-    saveData(StorageEnum.CompletedTask, updatedTasks);
+    const existingCompletedTasks = getData(StorageEnum.CompletedTask) || [];
+    const updatedCompletedTasks = [...existingCompletedTasks, task];
+    saveData(StorageEnum.CompletedTask, updatedCompletedTasks);
 
   };
 

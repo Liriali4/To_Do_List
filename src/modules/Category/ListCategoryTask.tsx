@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, Box, Flex } from "@chakra-ui/react";
-import { StorageEnum, getData } from "../../DataBase/LocalStorageDao";
+import { StorageEnum } from "../../DataBase/LocalStorageDao";
 import { CategoryType } from "../../types/allTypes";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { useCategoryModule } from "./useCategoryModule";
@@ -9,14 +9,8 @@ import { useCategoryStore } from "../../State/zustand";
 export default function CategoryOfTask(): JSX.Element {
 
     const categoryModule = useCategoryModule();
-
-    const setCategories = useCategoryStore(state => state.setCategories);
     const categories = useCategoryStore(state => state.categories);
-
-    useEffect(() => {
-        const data = getData(StorageEnum.Category) || [];
-        setCategories(data)
-    }, [setCategories]);
+    
 
     function editCategory(task: CategoryType) {
         categoryModule.editItem(task)

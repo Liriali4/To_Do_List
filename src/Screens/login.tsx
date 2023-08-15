@@ -1,12 +1,26 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCategoryStore, useTaskStore } from "../State/zustand";
+import { StorageEnum, getData } from "../DataBase/LocalStorageDao";
 
 
 export default function Login(): JSX.Element {
+
+    const setCategories = useCategoryStore(state => state.setCategories);
+    const setTasks = useTaskStore(state => state.setTasks);
+
+    useEffect(() => {
+        const tasks = getData(StorageEnum.Task) || [];
+        setTasks(tasks);
+        const categories = getData(StorageEnum.Category) || [];
+        setCategories(categories)
+    }, [setCategories, setTasks]);
+
     const navigation = useNavigate()
-    function login(){
+    function login() {
         navigation('/home')
+
     }
     return (
         <Flex
@@ -24,7 +38,6 @@ export default function Login(): JSX.Element {
                 h={'250px'}
                 color={'branco.unico'}
             >
-
                 <Text
                     fontSize={'30px'}
                     textAlign={'center'}
