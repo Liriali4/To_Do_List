@@ -1,13 +1,13 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import Home from './Screens/home';
 import { theme } from './Themes/themes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Screens/login';
 import PageNotFound from './Screens/PageNotFound';
-import Category from './Screens/category';
+import Category from './modules/Category/category';
 import AddTask from './modules/Task/AddTask';
 import Historic from './modules/Historic/historic';
+import TaskList from './modules/Task/taskList';
 
 export default function App(): JSX.Element {
   return (
@@ -15,7 +15,7 @@ export default function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={'/'} element={<Login />} />
-          <Route path={'/Home'} element={<Home />} />
+          <Route path={'/home'} element={<TaskList />} />
           <Route path={'/addcategory'} element={<Category />} />
           <Route path={'/addtask'} element={<AddTask />} />
           <Route path={'/historicoftasks'} element={<Historic />} />

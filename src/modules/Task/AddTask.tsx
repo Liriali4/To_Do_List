@@ -83,7 +83,7 @@ export default function AddTask(): JSX.Element {
                     >
                         Adicione uma nova Tarefa.</Text>
                     <TaskInput
-                        label="Task:"
+                        label="O que você tem a fazer?"
                         onChange={handleTaskChange}
                         value={newTask}
                     />
