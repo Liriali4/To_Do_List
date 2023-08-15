@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
-import { useCategoryStore } from "../../State/zustand";
+import { useCategoryModule } from "./useCategoryModule"; // Importando o módulo de categorias
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 import { CategoryType } from "../../types/allTypes";
 
-
 export default function AddCategory(): JSX.Element {
+    const [newCategory, setNewCategory] = useState({ name: '', position: '' });
 
-    const [newCategory, setNewCategory] = useState<CategoryType>({ name: '', position: '' });
-    const addCategory = useCategoryStore((state: { addCategory: any; }) => state.addCategory);
+    // Criando uma instância do módulo de categorias
+    const categoryModule = useCategoryModule();
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (newCategory.name.trim() !== '' && newCategory.position.trim() !== '') {
-            addCategory(newCategory);
+            const CategoryToAdd: CategoryType = {
+                id: Date.now(),
+                name: newCategory.name,
+                position: newCategory.position
+            };
+            // Usando o método addItem do contrato
+            categoryModule.addItem(CategoryToAdd);
             const existingCategories = getData(StorageEnum.Category) || [];
-            const updatedCategories = [...existingCategories, newCategory];
+            const updatedCategories = [...existingCategories, CategoryToAdd];
             saveData(StorageEnum.Category, updatedCategories);
             setNewCategory({ name: '', position: '' });
         }
@@ -62,10 +68,10 @@ export default function AddCategory(): JSX.Element {
                 alignContent={"center"}
                 w={'100%'}
             >
-            <TaskButton
-                label="Add Category"
-                onClick={handleSubmit}
-            />
+                <TaskButton
+                    label="Add Category"
+                    onClick={handleSubmit}
+                />
             </Box>
         </Flex >
     )

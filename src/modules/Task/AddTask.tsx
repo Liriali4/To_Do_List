@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
-import { useTaskStore } from "../../State/zustand";
+import { useTaskModule } from "./useTaskModule"; // Importando o módulo de tarefas
 import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
 import Select from 'react-select';
 import { CategoryType, TaskType } from "../../types/allTypes";
@@ -11,8 +11,9 @@ import Sidebar from "../../Components/sideBar";
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');
     const [newCategory, setNewCategory] = useState({ label: '', value: '' });
-    const addTask = useTaskStore((state: { addTask: any; }) => state.addTask);
 
+    // Criando uma instância do módulo de tarefas
+    const taskModule = useTaskModule();
 
     const categories = getData(StorageEnum.Category) || [];
 
@@ -26,7 +27,8 @@ export default function AddTask(): JSX.Element {
                 category: category,
                 completed: false,
             };
-            addTask(taskToAdd);
+            // Usando o método addItem do contrato
+            taskModule.addItem(taskToAdd);
 
             const existingTasks = getData(StorageEnum.Task) || [];
             const updatedTasks = [...existingTasks, taskToAdd];
@@ -34,7 +36,6 @@ export default function AddTask(): JSX.Element {
             console.log("New Task Object:", taskToAdd);
             setNewTask('');
             setNewCategory({ label: '', value: '' });
-
         }
     };
 
@@ -96,8 +97,8 @@ export default function AddTask(): JSX.Element {
                                 border: '2px solid #FF0080',
                                 height: 48,
                                 fontSize: 14,
-                                outline:'none',
-                                background:'cinza.input',
+                                outline: 'none',
+                                background: 'cinza.input',
                             }),
                         }}
                         value={newCategory}
@@ -105,7 +106,6 @@ export default function AddTask(): JSX.Element {
                         className='basic-single'
                         classNamePrefix='select'
                         onChange={(e) => handleCategoryChange(e)}
-
                     />
                     <Box
                         display={'flex'}

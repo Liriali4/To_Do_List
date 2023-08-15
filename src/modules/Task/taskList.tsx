@@ -4,10 +4,15 @@ import { getData, saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
 import { TaskType } from '../../types/allTypes';
 import { FiTrash } from 'react-icons/fi';
 import Sidebar from '../../Components/sideBar';
+import { useTaskModule } from './useTaskModule';
 
 export default function TaskList() {
 
     const [tasks, setTasks] = useState<TaskType[]>([]);
+
+    const taskModule = useTaskModule(); // Criando uma instância do módulo de categorias
+
+
 
     useEffect(() => {
         const data = getData(StorageEnum.Task) || [];
@@ -20,7 +25,6 @@ export default function TaskList() {
         const updatedTasks = tasks.map((t: TaskType) =>
             t.id === task.id ? { ...t, completed: !t.completed } : t
         );
-
         // Aqui você pode salvar o estado atualizado de tasks no localStorage se necessário
         saveData(StorageEnum.Task, updatedTasks);
         setTasks(updatedTasks);
@@ -28,14 +32,7 @@ export default function TaskList() {
 
     function removetask(task: TaskType) {
         console.log("eliminado")
-
-        const tasksWithoutDeleted = tasks.filter((t: TaskType) => t.id !== task.id);
-        saveData(StorageEnum.Task, tasksWithoutDeleted);
-        setTasks(tasksWithoutDeleted);
-
-        const existingTasks = getData(StorageEnum.CompletedTask) || [];
-        const updatedTasks = [...existingTasks, task];
-        saveData(StorageEnum.CompletedTask, updatedTasks);
+        taskModule.deleteItem(task, tasks)
     }
 
     return (
