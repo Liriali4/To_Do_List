@@ -2,7 +2,9 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import {  FiPlusSquare, FiLogOut } from 'react-icons/fi'
-import { FaHistory, FaListUl } from 'react-icons/fa'
+import { TbHistoryToggle } from 'react-icons/tb'
+import {BiCategoryAlt } from 'react-icons/bi'
+import {GoTasklist } from 'react-icons/go'
 
 
 export default function Sidebar() {
@@ -66,7 +68,7 @@ export default function Sidebar() {
                             fontWeight: "700"
                         }}
                     >
-                        <FaListUl
+                        <GoTasklist
                             size={23} />
                         <Text
                             p="0 6px 0"
@@ -92,11 +94,11 @@ export default function Sidebar() {
                             fontWeight: "700"
                         }}
                     >
-                        <FiPlusSquare
+                        <BiCategoryAlt
                             size={23} />
                         <Text
                             p="0 6px 0"
-                        >Add Categoria</Text>
+                        >Categorias</Text>
                     </Flex>
                 </Link>
 
@@ -147,7 +149,7 @@ export default function Sidebar() {
                             fontWeight: "700"
                         }}
                     >
-                        <FaHistory
+                        <TbHistoryToggle
                             size={23}
                             color="cinza.sidebar"
                         />

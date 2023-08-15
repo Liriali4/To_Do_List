@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Flex, Text, } from '@chakra-ui/react'
 import { getData, saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
 import { TaskType } from '../../types/allTypes';
-import { FiTrash } from 'react-icons/fi';
+import { FiEdit, FiTrash } from 'react-icons/fi';
 import Sidebar from '../../Components/sideBar';
 import { useTaskModule } from './useTaskModule';
 
@@ -12,27 +12,28 @@ export default function TaskList() {
 
     const taskModule = useTaskModule(); // Criando uma instância do módulo de categorias
 
-
-
     useEffect(() => {
         const data = getData(StorageEnum.Task) || [];
         setTasks(data);
     }, []); // This empty array means the effect runs only once on mount
 
+    function removetask(task: TaskType) {
+        console.log("eliminado")
+        taskModule.deleteItem(task, tasks)
+    }
+
+    function editTask(task: TaskType) {
+        taskModule.editItem(task)
+    }
 
     function completeTask(task: TaskType) {
         console.log('ff')
         const updatedTasks = tasks.map((t: TaskType) =>
             t.id === task.id ? { ...t, completed: !t.completed } : t
         );
-        // Aqui você pode salvar o estado atualizado de tasks no localStorage se necessário
+
         saveData(StorageEnum.Task, updatedTasks);
         setTasks(updatedTasks);
-    }
-
-    function removetask(task: TaskType) {
-        console.log("eliminado")
-        taskModule.deleteItem(task, tasks)
     }
 
     return (
@@ -103,6 +104,12 @@ export default function TaskList() {
                                             outline: "none",
                                             cursor: "pointer",
                                         }}
+                                    />
+
+                                    <FiEdit
+                                        size={15}
+                                        color="#7928CA"
+                                        onClick={() => editTask(task)}
                                     />
                                     <FiTrash
                                         size={15}

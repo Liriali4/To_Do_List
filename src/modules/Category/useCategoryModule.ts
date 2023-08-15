@@ -1,32 +1,44 @@
 import { useState } from 'react';
 import { CategoryType } from '../../types/allTypes';
 import { ItemModuleContract } from '../../Contracts/conctract';
-import { StorageEnum, saveData } from '../../DataBase/LocalStorageDao';
+import { StorageEnum, deleteData, editData, getData, saveData } from '../../DataBase/LocalStorageDao';
+import { useCategoryStore } from '../../State/zustand';
 
 export function useCategoryModule(): ItemModuleContract<CategoryType> {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+    const [categories, setCategories] = useState<CategoryType[]>([]);
 
-  const addItem = (category: CategoryType) => {
-    setCategories([...categories, category]);
-  };
+        const setCategoriesState = useCategoryStore(state => state.setCategories);
+        const categoriesState = useCategoryStore(state => state.addCategory);
 
-  const editItem = (category: CategoryType) => {
-    // Lógica para editar categoria
-    // Pode envolver encontrar a categoria pelo nome ou posição e atualizá-la
-  };
+    const addItem = (CategoryToAdd: CategoryType) => {
+        setCategories([...categories, CategoryToAdd]);
+
+        const existingCategories = getData(StorageEnum.Category) || [];
+        const updatedCategories = [...existingCategories, CategoryToAdd];
+        saveData(StorageEnum.Category, updatedCategories);
+        categoriesState(CategoryToAdd)
+    };
+
+    const editItem = (task: CategoryType) => {
+        editData(StorageEnum.Category, task.id, task)
+    };
+
+    const deleteItem = (categoryToDelete: CategoryType, allCategoreis: CategoryType[]) => {
+        const categoreisWithoutDeleted = allCategoreis.filter((c: CategoryType) => c.name !== categoryToDelete.name);
+        saveData(StorageEnum.Category, categoreisWithoutDeleted);
+        setCategories(categoreisWithoutDeleted);
+        setCategoriesState(categoreisWithoutDeleted);
+    };
+
+    const deleteAllItens = (key: string) => {
+        deleteData(key)
+    }
 
 
-const deleteItem = (categoryToDelete: CategoryType, allCategoreis: CategoryType[]) => {
-    
-    const categoreisWithoutDeleted = allCategoreis.filter((c: CategoryType) => c.name !== categoryToDelete.name);
-    saveData(StorageEnum.Category, categoreisWithoutDeleted);
-    setCategories(categoreisWithoutDeleted);
-};
-
-
-  return {
-    addItem,
-    editItem,
-    deleteItem,
-  };
+    return {
+        addItem,
+        editItem,
+        deleteItem,
+        deleteAllItens,
+    };
 }

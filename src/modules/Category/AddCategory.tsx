@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
-import { useCategoryModule } from "./useCategoryModule"; // Importando o módulo de categorias
-import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
+import { useCategoryModule } from "./useCategoryModule";
 import { CategoryType } from "../../types/allTypes";
 
 export default function AddCategory(): JSX.Element {
     const [newCategory, setNewCategory] = useState({ name: '', position: '' });
 
-    // Criando uma instância do módulo de categorias
     const categoryModule = useCategoryModule();
 
     const handleSubmit = (e: any) => {
@@ -18,13 +16,10 @@ export default function AddCategory(): JSX.Element {
             const CategoryToAdd: CategoryType = {
                 id: Date.now(),
                 name: newCategory.name,
-                position: newCategory.position
+                obs: newCategory.position
             };
-            // Usando o método addItem do contrato
+            
             categoryModule.addItem(CategoryToAdd);
-            const existingCategories = getData(StorageEnum.Category) || [];
-            const updatedCategories = [...existingCategories, CategoryToAdd];
-            saveData(StorageEnum.Category, updatedCategories);
             setNewCategory({ name: '', position: '' });
         }
     };
@@ -43,9 +38,9 @@ export default function AddCategory(): JSX.Element {
             borderRadius={'10px'}
             boxShadow="2px 2px #ddd"
             bg={'branco.unico'}
-            p={'0 10px'}
-            w='365px'
-            h={'360px'}>
+            p={'0 20px'}
+            w='410px'
+            h={'450px'}>
             <Text
                 fontSize={'24px'}
                 fontWeight={'600'}
@@ -58,7 +53,7 @@ export default function AddCategory(): JSX.Element {
                 value={newCategory.name}
             />
             <TaskInput
-                label="Posição:"
+                label="Observação:"
                 onChange={handleCategoryPositionChange}
                 value={newCategory.position}
             />

@@ -18,7 +18,7 @@ export default function Historic() {
 
     console.log(tasks)
 
-    function removetask() {
+    function removeAllTask() {
         console.log("Histórico eliminado")
         deleteData(StorageEnum.CompletedTask)
         setTasks([])
@@ -57,7 +57,7 @@ export default function Historic() {
                         <FiTrash
                             size={25}
                             color="#7928CA"
-                            onClick={() => removetask()}
+                            onClick={() => removeAllTask()}
                         />
                     </Flex>
                     <Box

@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
-import { useTaskModule } from "./useTaskModule"; // Importando o módulo de tarefas
-import { StorageEnum, getData, saveData } from "../../DataBase/LocalStorageDao";
+import { useTaskModule } from "./useTaskModule";
 import Select from 'react-select';
 import { CategoryType, TaskType } from "../../types/allTypes";
 import Sidebar from "../../Components/sideBar";
+import { useCategoryStore } from "../../State/zustand";
 
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');
     const [newCategory, setNewCategory] = useState({ label: '', value: '' });
 
-    // Criando uma instância do módulo de tarefas
     const taskModule = useTaskModule();
 
-    const categories = getData(StorageEnum.Category) || [];
+    const categories = useCategoryStore(state => state.categories);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -27,13 +26,9 @@ export default function AddTask(): JSX.Element {
                 category: category,
                 completed: false,
             };
-            // Usando o método addItem do contrato
+            
             taskModule.addItem(taskToAdd);
 
-            const existingTasks = getData(StorageEnum.Task) || [];
-            const updatedTasks = [...existingTasks, taskToAdd];
-            saveData(StorageEnum.Task, updatedTasks);
-            console.log("New Task Object:", taskToAdd);
             setNewTask('');
             setNewCategory({ label: '', value: '' });
         }

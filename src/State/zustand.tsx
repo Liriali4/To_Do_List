@@ -10,6 +10,7 @@ type TaskStore = {
 
 type CategoryStore = {
   categories: CategoryType[];
+  setCategories: (categories: CategoryType[]) => void; 
   addCategory: (category: CategoryType) => void;
 };
 
@@ -28,6 +29,10 @@ export const useTaskStore = create<TaskStore>((set) => ({
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
   categories: [],
+  setCategories: (categories) => // Implemente a lógica para definir as categorias aqui
+    set((state) => ({
+      categories,
+    })),
   addCategory: (category) =>
     set((state) => ({
       categories: [...state.categories, category],

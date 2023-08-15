@@ -8,5 +8,5 @@ export type TaskType = {
 export type CategoryType = {
   id: number;
   name: string;
-  position: string;
+  obs: string;
 };
