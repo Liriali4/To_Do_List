@@ -16,12 +16,11 @@ export default function AddTask(): JSX.Element {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (newTask !== '' && CategoryOfTask !== null) {
-            let category = CategoryOfTask.value
 
             const taskToAdd: TaskType = {
                 id: Date.now(),
                 name: newTask,
-                category: category,
+                category: CategoryOfTask.value,
                 completed: false,
             };
 
