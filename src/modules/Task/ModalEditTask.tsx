@@ -1,138 +1,84 @@
-/* import React, { useEffect, useState } from "react";
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Input } from "@chakra-ui/react";
-import { CategoryType, TaskType } from "../types/allTypes";
-import { Box } from "@chakra-ui/react";
-import Select from 'react-select';
+import React, { useState } from "react";
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, Box, Flex } from "@chakra-ui/react";
+import TaskButton from "../../Components/TaskButton";
+import TaskInput from "../../Components/TaskInput";
+import TaskSelectCategories from "../../Components/TaskSelectCategory";
+import { TaskType } from "../../types/allTypes";
+import { useTaskModule } from "./useTaskModule";
 
 interface ModalEditProps {
     isOpen: boolean;
     onClose: () => void;
-    itemToEdit: TaskType | CategoryType; // Aceita TaskType ou CategoryType
+    taskToEdit: TaskType;
 }
 
-export default function ModalEdit(props: ModalEditProps): JSX.Element {
+export default function ModalEditTask(props: ModalEditProps): JSX.Element {
 
     const {
         isOpen,
         onClose,
-        itemToEdit,
+        taskToEdit,
     } = props;
 
-    const [newTask, setNewTask] = useState('');
-    const [newCategory, setNewCategory] = useState({ label: '', value: '' });
+    const [editedTask, setEditedTask] = useState<TaskType>(taskToEdit);
 
     const taskModule = useTaskModule();
 
-    const categories = useCategoryStore(state => state.categories);
-    
-    const setCategories = useCategoryStore(state => state.setCategories);
-
-    useEffect(() => {
-        const categories = getData(StorageEnum.Category) || [];
-        setCategories(categories)
-    }, [setCategories]);
-
-
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        if (newTask !== '' && newCategory !== null) {
-            let category = newCategory.value
-            const taskToAdd: TaskType = {
-                id: Date.now(),
-                name: newTask,
-                category: category,
-                completed: false,
-            };
-
-            taskModule.addItem(taskToAdd);
-
-            setNewTask('');
-            setNewCategory({ label: '', value: '' });
-        }
-    };
-
     const handleTaskChange = (value: string) => {
-        setNewTask(value);
+        setEditedTask({ ...editedTask, name: value });
     };
 
     const handleCategoryChange = (option: any) => {
-        setNewCategory(option);
+        setEditedTask({ ...editedTask, category: option.value });
     };
 
-    const options = categories.map((name: CategoryType) => ({
-        value: name.name,
-        label: name.name
-    }));
+    const handleSave = () => {
+        taskModule.editItem(editedTask);
+        onClose();
+    };
+    console.log(taskToEdit, editedTask)
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
+            <ModalOverlay bg="rgba(0, 0, 0, 0.5)" />
             <ModalContent
-                bg='#fff'
+                bg={'branco.unico'}
                 borderRadius='5px'
-                w={'500px'}
-                h={'500px'}
+                w={'460px'}
+                h={'440px'}
+                m={'auto'}
             >
-                <ModalHeader>Editar</ModalHeader>
+                <ModalHeader p={'15px'} w={'100%'} display={'flex'} flexDir={'row'} justifyContent={'space-between'}>
+                    <Text fontSize={'24px'} fontWeight={'600'} color={'roxo.escuro'}>
+                        Editar Tarefa
+                    </Text>
                 <ModalCloseButton />
-                <ModalBody flexDir={'column'}
-                    justify={'space-around'}
-                    borderRadius={'10px'}
-                    boxShadow="2px 2px #ddd"
-                    p={'15px'}
-                    w={'460px'}
-                    h={'460px'}
-                    bg={'branco.unico'}
+                </ModalHeader>
+                <ModalBody
+                    h={'100%'}
                 >
-                    <Text
-                        fontSize={'24px'}
-                        fontWeight={'600'}
-                        color={'roxo.escuro'}
-                    >
-                        Adicione uma nova Tarefa.</Text>
-                    <TaskInput
-                        label="O que você tem a fazer?"
-                        onChange={handleTaskChange}
-                        value={newTask}
-                    />
-                    <Text fontSize={'16px'}>Selecione a categoria:</Text>
-                    <Select
-                        placeholder={'Selecione a categoria'}
-                        styles={{
-                            control: (baseStyles, _) => ({
-                                ...baseStyles,
-                                border: '2px solid #FF0080',
-                                height: 48,
-                                fontSize: 14,
-                                outline: 'none',
-                                background: 'cinza.input',
-                            }),
-                        }}
-                        value={newCategory}
-                        options={options}
-                        className='basic-single'
-                        classNamePrefix='select'
-                        onChange={(e) => handleCategoryChange(e)}
-                    />
-                    <Box
-                        display={'flex'}
-                        justifyContent={'center'}
-                        alignContent={"center"}
+                    <Flex
                         w={'100%'}
+                        h={'100%'}
+                        flexDir={'column'}
+                        justify={'space-around'}
+                        p={'15px'}
                     >
-                        <TaskButton
-                            label="Add Task"
-                            onClick={handleSubmit}
+                        <TaskInput
+                            label="Nome da tarefa"
+                            onChange={handleTaskChange}
+                            value={editedTask.name}
                         />
-                    </Box>
+                        <TaskSelectCategories
+                            value={editedTask.category}
+                            onChange={handleCategoryChange}
+                        />
+                        <Box display={'flex'} justifyContent={'center'} alignContent={"center"} w={'100%'}>
+                            <TaskButton label="Salvar alterações" onClick={handleSave} />
+                        </Box>
+                    </Flex>
                 </ModalBody>
-
-                <ModalFooter>
-                    <TaskButton onClick={onClose} label={"Salvar"} />
-                </ModalFooter>
             </ModalContent>
         </Modal>
     )
 }
- */

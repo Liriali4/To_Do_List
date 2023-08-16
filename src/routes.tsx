@@ -7,7 +7,7 @@ import PageNotFound from './Screens/PageNotFound';
 import Category from './modules/Category/category';
 import AddTask from './modules/Task/AddTask';
 import Historic from './modules/Historic/historic';
-import TaskList from './modules/Task/taskList';
+import TaskList from './modules/Task/TaskList';
 
 export default function App(): JSX.Element {
   return (

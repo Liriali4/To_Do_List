@@ -9,14 +9,14 @@ import TaskSelectCategories from "../../Components/TaskSelectCategory";
 
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');
-    const [newCategory, setNewCategory] = useState({ label: '', value: '' });
+    const [CategoryOfTask, setCategoryOfTask] = useState({ label: '', value: '' });
 
     const taskModule = useTaskModule();
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        if (newTask !== '' && newCategory !== null) {
-            let category = newCategory.value
+        if (newTask !== '' && CategoryOfTask !== null) {
+            let category = CategoryOfTask.value
 
             const taskToAdd: TaskType = {
                 id: Date.now(),
@@ -28,7 +28,7 @@ export default function AddTask(): JSX.Element {
             taskModule.addItem(taskToAdd);
 
             setNewTask('');
-            setNewCategory({ label: '', value: '' });
+            setCategoryOfTask({ label: '', value: '' });
         }
     };
 
@@ -37,7 +37,7 @@ export default function AddTask(): JSX.Element {
     };
 
     const handleCategoryChange = (option: any) => {
-        setNewCategory(option);
+        setCategoryOfTask(option);
     };
 
     return (
@@ -77,7 +77,7 @@ export default function AddTask(): JSX.Element {
                         value={newTask}
                     />
                     <TaskSelectCategories
-                        value={newCategory}
+                        value={CategoryOfTask}
                         onChange={(e) => handleCategoryChange(e)}
                     />
                     <Box

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex, Text, useDisclosure, } from '@chakra-ui/react'
 import { getData, saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
 import { TaskType } from '../../types/allTypes';
@@ -6,9 +6,11 @@ import { FiEdit, FiTrash } from 'react-icons/fi';
 import Sidebar from '../../Components/sideBar';
 import { useTaskModule } from './useTaskModule';
 import { useTaskStore } from '../../State/zustand';
-import ModalEdit from '../../Components/TaskSelectCategory';
+import ModalEditTask from './ModalEditTask';
 
 export default function TaskList() {
+
+    const [selectedTask, setSelectedTask] = useState<TaskType>({id: 0, name: '', completed: false, category: '' });
 
     const taskModule = useTaskModule();
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -21,13 +23,8 @@ export default function TaskList() {
         setTasks(tasks);
     }, [setTasks]);
 
-
     function removetask(task: TaskType) {
         taskModule.deleteItem(task, tasks)
-    }
-
-    function editTask(task: TaskType) {
-        taskModule.editItem(task)
     }
 
     function completeTask(task: TaskType) {
@@ -112,7 +109,11 @@ export default function TaskList() {
                                         <FiEdit
                                             size={15}
                                             color="#7928CA"
-                                            onClick={()=> onOpen()}
+                                            onClick={
+                                                () => {
+                                                    onOpen();
+                                                    setSelectedTask(task);
+                                                }}
                                         />
                                         <FiTrash
                                             size={15}
@@ -126,15 +127,11 @@ export default function TaskList() {
                     </Box>
                 </Flex>
             </Box>
-            {/* <ModalEdit
+            <ModalEditTask
                 isOpen={isOpen}
                 onClose={onClose}
-                 itemToEdit={{
-                    id: 0,
-                    name: '',
-                    completed: false,
-                    category: ''
-                }}/> */}
+                taskToEdit={selectedTask}
+            />
         </>
     );
 }
