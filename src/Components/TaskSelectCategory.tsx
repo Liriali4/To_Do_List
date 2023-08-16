@@ -7,11 +7,12 @@ import { StorageEnum, getData } from "../DataBase/LocalStorageDao";
 
 interface SelectProps {
     value: any;
+    placeholder?: string;
     onChange: (value: any) => void;
 }
 
 export default function TaskSelectCategories(props: SelectProps): JSX.Element {
-    const {  value, onChange } = props;
+    const {  value, placeholder, onChange } = props;
     
     const categories = useCategoryStore(state => state.categories);    
     const setCategories = useCategoryStore(state => state.setCategories);
@@ -31,7 +32,7 @@ export default function TaskSelectCategories(props: SelectProps): JSX.Element {
         <Flex flexDir={'column'}>
             <Text mb={'15px'} fontSize={'16px'}>Selecione a categoria:</Text>
             <Select
-                placeholder={'Selecione a categoria'}
+                placeholder={placeholder}
                 styles={{
                     control: (baseStyles, _) => ({
                         ...baseStyles,

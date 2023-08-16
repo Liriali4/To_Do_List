@@ -6,19 +6,23 @@ import { useTaskStore } from '../../State/zustand';
 
 export function useTaskModule(): ItemModuleContract<TaskType> {
   const [tasks, setTasks] = useState<TaskType[]>([]);
-  
+
   const setTasksState = useTaskStore(state => state.setTasks);
+
+  const allTasks = useTaskStore(state => state.tasks);
 
   const addItem = (taskToAdd: TaskType) => {
     setTasks([...tasks, taskToAdd]);
-    
+
     const existingTasks = getData(StorageEnum.Task) || [];
     const updatedTasks = [...existingTasks, taskToAdd];
     saveData(StorageEnum.Task, updatedTasks);
   };
 
   const editItem = (task: TaskType) => {
-    editData(StorageEnum.Task, task.id, task)
+    const updatedTasks = allTasks.map((t: TaskType) => (t.id === task.id ? task : t));
+    editData(StorageEnum.Task, task.id, task);
+    setTasksState(updatedTasks);
   };
 
   const deleteItem = (task: TaskType, allTask: TaskType[]) => {

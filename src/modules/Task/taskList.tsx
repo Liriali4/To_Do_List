@@ -10,7 +10,7 @@ import ModalEditTask from './ModalEditTask';
 
 export default function TaskList() {
 
-    const [selectedTask, setSelectedTask] = useState<TaskType>({id: 0, name: '', completed: false, category: '' });
+    const [selectedTask, setSelectedTask] = useState<TaskType>({ id: 0, name: '', completed: false, category: '' });
 
     const taskModule = useTaskModule();
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -78,11 +78,12 @@ export default function TaskList() {
                                         key={index}
                                         style={{
                                             fontStyle: task.completed ? 'italic' : 'normal',
+                                            textDecoration: task.completed ? 'line-through' : 'none',
                                             color: task.completed ? '#555' : 'black',
                                         }}
                                     ># {index + 1}</Text>
                                     <Text
-                                        w={'70%'}
+                                        w={'40%'}
                                         p={'10px 10px'}
                                         style={{
                                             fontStyle: task.completed ? 'italic' : 'normal',
@@ -91,6 +92,15 @@ export default function TaskList() {
                                         }}
                                     >{task.name}
                                     </Text>
+                                    <Text
+                                        w={'30%'}
+                                        p={'10px 10px'}
+                                        style={{
+                                            fontStyle: task.completed ? 'italic' : 'normal',
+                                            textDecoration: task.completed ? 'line-through' : 'none',
+                                            color: task.completed ? '#555' : 'black',
+                                        }}
+                                    >({task.category})</Text>
                                     <Flex justify={'space-around'} w={'20%'} p={'10px 0'}>
                                         <input
                                             type="checkbox"

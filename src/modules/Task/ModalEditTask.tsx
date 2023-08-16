@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, Box, Flex } from "@chakra-ui/react";
 import TaskButton from "../../Components/TaskButton";
 import TaskInput from "../../Components/TaskInput";
@@ -20,9 +20,13 @@ export default function ModalEditTask(props: ModalEditProps): JSX.Element {
         taskToEdit,
     } = props;
 
-    const [editedTask, setEditedTask] = useState<TaskType>(taskToEdit);
-
+    const [editedTask, setEditedTask] = useState<TaskType>({...taskToEdit});
+    
     const taskModule = useTaskModule();
+
+    useEffect(() => {
+        setEditedTask({...taskToEdit});
+    }, [taskToEdit]);
 
     const handleTaskChange = (value: string) => {
         setEditedTask({ ...editedTask, name: value });
@@ -71,6 +75,7 @@ export default function ModalEditTask(props: ModalEditProps): JSX.Element {
                         />
                         <TaskSelectCategories
                             value={editedTask.category}
+                            placeholder={editedTask.category}
                             onChange={handleCategoryChange}
                         />
                         <Box display={'flex'} justifyContent={'center'} alignContent={"center"} w={'100%'}>
