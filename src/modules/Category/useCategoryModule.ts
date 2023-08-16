@@ -9,6 +9,7 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
 
         const setCategoriesState = useCategoryStore(state => state.setCategories);
         const categoriesState = useCategoryStore(state => state.addCategory);
+        const allCategories = useCategoryStore(state => state.categories);
 
     const addItem = (CategoryToAdd: CategoryType) => {
         setCategories([...categories, CategoryToAdd]);
@@ -19,9 +20,11 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
         categoriesState(CategoryToAdd)
     };
 
-    const editItem = (task: CategoryType) => {
-        editData(StorageEnum.Category, task.id, task)
-    };
+    const editItem = (category: CategoryType) => {
+        const updatedTasks = allCategories.map((t: CategoryType) => (t.id === category.id ? category : t));
+        editData(StorageEnum.Category, category.id, category)
+        setCategoriesState(updatedTasks);
+      };
 
     const deleteItem = (categoryToDelete: CategoryType, allCategoreis: CategoryType[]) => {
         const categoreisWithoutDeleted = allCategoreis.filter((c: CategoryType) => c.name !== categoryToDelete.name);
