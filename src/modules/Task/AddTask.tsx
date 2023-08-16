@@ -3,10 +3,9 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
 import { useTaskModule } from "./useTaskModule";
-import Select from 'react-select';
-import { CategoryType, TaskType } from "../../types/allTypes";
+import { TaskType } from "../../types/allTypes";
 import Sidebar from "../../Components/sideBar";
-import { useCategoryStore } from "../../State/zustand";
+import TaskSelectCategories from "../../Components/TaskSelectCategory";
 
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');
@@ -14,19 +13,18 @@ export default function AddTask(): JSX.Element {
 
     const taskModule = useTaskModule();
 
-    const categories = useCategoryStore(state => state.categories);
-
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (newTask !== '' && newCategory !== null) {
             let category = newCategory.value
+
             const taskToAdd: TaskType = {
                 id: Date.now(),
                 name: newTask,
                 category: category,
                 completed: false,
             };
-            
+
             taskModule.addItem(taskToAdd);
 
             setNewTask('');
@@ -41,11 +39,6 @@ export default function AddTask(): JSX.Element {
     const handleCategoryChange = (option: any) => {
         setNewCategory(option);
     };
-
-    const options = categories.map((name: CategoryType) => ({
-        value: name.name,
-        label: name.name
-    }));
 
     return (
         <Box
@@ -83,23 +76,8 @@ export default function AddTask(): JSX.Element {
                         onChange={handleTaskChange}
                         value={newTask}
                     />
-                    <Text fontSize={'16px'}>Selecione a categoria:</Text>
-                    <Select
-                        placeholder={'Selecione a categoria'}
-                        styles={{
-                            control: (baseStyles, _) => ({
-                                ...baseStyles,
-                                border: '2px solid #FF0080',
-                                height: 48,
-                                fontSize: 14,
-                                outline: 'none',
-                                background: 'cinza.input',
-                            }),
-                        }}
+                    <TaskSelectCategories
                         value={newCategory}
-                        options={options}
-                        className='basic-single'
-                        classNamePrefix='select'
                         onChange={(e) => handleCategoryChange(e)}
                     />
                     <Box
