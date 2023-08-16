@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, Box, Flex } from "@chakra-ui/react";
 import TaskButton from "../../Components/TaskButton";
 import TaskInput from "../../Components/TaskInput";
-import TaskSelectCategories from "../../Components/TaskSelectCategory";
+import TaskSelectCategories from "./components/TaskSelectCategory";
 import { TaskType } from "../../types/allTypes";
 import { useTaskModule } from "./useTaskModule";
 

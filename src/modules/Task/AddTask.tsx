@@ -5,7 +5,7 @@ import TaskButton from "../../Components/TaskButton";
 import { useTaskModule } from "./useTaskModule";
 import { TaskType } from "../../types/allTypes";
 import Sidebar from "../../Components/sideBar";
-import TaskSelectCategories from "../../Components/TaskSelectCategory";
+import TaskSelectCategories from "./components/TaskSelectCategory";
 
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');
