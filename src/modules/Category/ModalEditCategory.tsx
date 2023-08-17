@@ -39,7 +39,6 @@ export default function ModalEditCategory(props: ModalEditProps): JSX.Element {
         categoryModule.editItem(editedCategory);
         onClose();
     };
-    console.log(categoryToEdit, editedCategory)
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>

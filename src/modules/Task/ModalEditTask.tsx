@@ -40,7 +40,6 @@ export default function ModalEditTask(props: ModalEditProps): JSX.Element {
         taskModule.editItem(editedTask);
         onClose();
     };
-    console.log(taskToEdit, editedTask)
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
