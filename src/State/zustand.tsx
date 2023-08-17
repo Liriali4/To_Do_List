@@ -55,4 +55,3 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
       categories: [...state.categories, category],
     })),
 }));
-
