@@ -1,6 +1,7 @@
 import create from 'zustand';
 import { CategoryType, TaskType } from '../types/allTypes';
 import { StorageEnum, getData } from '../DataBase/LocalStorageDao';
+import { GetAllTasksDao } from '../modules/Task/Dao/TaskDao';
 
 type TaskStore = {
   tasks: TaskType[];
@@ -45,7 +46,7 @@ export const useCompletedTaskStore = create<CompletedTaskStore>((set) => ({
 }));
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
-  categories: getData(StorageEnum.Category) || [],
+  categories: GetAllTasksDao() || [],
   setCategories: (categories) =>
     set((state) => ({
       categories,
