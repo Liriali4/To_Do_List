@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { CategoryType } from '../../types/allTypes';
 import { ItemModuleContract } from '../../Contracts/conctract';
-import { StorageEnum, getData } from '../../DataBase/LocalStorageDao';
 import { useCategoryStore } from '../../State/zustand';
 import { AddCategoryDao, DeleteAllCategoriesDao, DeleteCategoryDao, EditCategoryDao } from './Dao/CategoryDao';
 
@@ -15,7 +14,7 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
     const addItem = (CategoryToAdd: CategoryType) => {
         setCategories([...categories, CategoryToAdd]);
 
-        const existingCategories = getData(StorageEnum.Category) || [];
+        const existingCategories = allCategories;
         const updatedCategories = [...existingCategories, CategoryToAdd];
         AddCategoryDao(updatedCategories);
 

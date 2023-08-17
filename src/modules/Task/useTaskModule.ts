@@ -1,24 +1,20 @@
-import { useState } from 'react';
 import { TaskType } from '../../types/allTypes';
 import { ItemModuleContract } from '../../Contracts/conctract';
-import { StorageEnum, getData } from '../../DataBase/LocalStorageDao';
-import { useTaskStore } from '../../State/zustand';
+import { useCompletedTaskStore, useTaskStore } from '../../State/zustand';
 import { AddTaskDao, DeleteAllTasksDao, DeleteTaskDao, EditTaskDao, SaveDeletedTaskOnHistoric } from './Dao/TaskDao';
 
 export function useTaskModule(): ItemModuleContract<TaskType> {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
 
   const setTasksState = useTaskStore(state => state.setTasks);
-
   const allTasks = useTaskStore(state => state.tasks);
+  const allCompletedTasks = useCompletedTaskStore(state => state.completedTasks);
+  const setAllCompletedTasks = useCompletedTaskStore(state => state.setCompletedTasks);
 
   const addItem = (taskToAdd: TaskType) => {
-    setTasks([...tasks, taskToAdd]);
-
-    const existingTasks = getData(StorageEnum.Task) || [];
+    const existingTasks = allTasks;
     const updatedTasks = [...existingTasks, taskToAdd];
     AddTaskDao(updatedTasks);
-    
+    setTasksState(updatedTasks);
   };
 
   const editItem = (task: TaskType) => {
@@ -32,10 +28,9 @@ export function useTaskModule(): ItemModuleContract<TaskType> {
     DeleteTaskDao(tasksWithoutDeleted);
     setTasksState(tasksWithoutDeleted)
 
-    const existingCompletedTasks = getData(StorageEnum.CompletedTask) || [];
-    const updatedCompletedTasks = [...existingCompletedTasks, task];
-    SaveDeletedTaskOnHistoric( updatedCompletedTasks);
-
+    const updatedCompletedTasks = [...allCompletedTasks, task];
+    SaveDeletedTaskOnHistoric(updatedCompletedTasks);
+    setAllCompletedTasks(updatedCompletedTasks);
   };
 
   const deleteAllItens = (key: string) => {

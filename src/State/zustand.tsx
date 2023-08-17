@@ -8,6 +8,12 @@ type TaskStore = {
   setTasks: (task: TaskType[]) => void;
 };
 
+type CompletedTaskStore = {
+  completedTasks: TaskType[];
+  addCompletedTasks: (task: TaskType) => void;
+  setCompletedTasks: (task: TaskType[]) => void;
+};
+
 type CategoryStore = {
   categories: CategoryType[];
   setCategories: (categories: CategoryType[]) => void;
@@ -23,6 +29,18 @@ export const useTaskStore = create<TaskStore>((set) => ({
   setTasks: (tasks) =>
   set((state) => ({
     tasks,
+  })),
+}));
+
+export const useCompletedTaskStore = create<CompletedTaskStore>((set) => ({
+  completedTasks: getData(StorageEnum.CompletedTask) || [],
+  addCompletedTasks: (completedTask) =>
+  set((state) => ({
+    completedTasks: [...state.completedTasks, completedTask],
+  })),
+  setCompletedTasks: (completedTasks) =>
+  set((state) => ({
+    completedTasks,
   })),
 }));
 

@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Flex, Text, } from '@chakra-ui/react'
-import { deleteData, getData, StorageEnum } from '../../DataBase/LocalStorageDao';
-import { TaskType } from '../../types/allTypes';
+import { StorageEnum } from '../../../DataBase/LocalStorageDao';
+import { TaskType } from '../../../types/allTypes';
 import { FiTrash } from 'react-icons/fi';
-import Sidebar from '../../Components/sideBar';
+import Sidebar from '../../../Components/sideBar';
+import { useCompletedTaskStore } from '../../../State/zustand';
+import { useTaskModule } from '../useTaskModule';
 
 export default function Historic() {
 
-    const [tasks, setTasks] = useState<TaskType[]>([]);
-
-    useEffect(() => {
-        const data = getData(StorageEnum.CompletedTask) || [];
-        if (data.length > 0) {
-            setTasks(data);
-        }
-    }, []);
-
-    console.log(tasks)
+    const allCompletedTasks = useCompletedTaskStore(state => state.completedTasks);
+    const setAllCompletedTasks = useCompletedTaskStore(state => state.setCompletedTasks);
+    const taskModule = useTaskModule();
 
     function removeAllTask() {
-        console.log("Histórico eliminado")
-        deleteData(StorageEnum.CompletedTask)
-        setTasks([])
+        taskModule.deleteAllItens(StorageEnum.CompletedTask)
+        setAllCompletedTasks([])
     }
 
     return (
@@ -63,8 +57,8 @@ export default function Historic() {
                     <Box
                         w={'100%'}
                     >
-                        {Array.isArray(tasks) && tasks.length > 0 ? (
-                            tasks.map((task: TaskType, index: any) => (
+                        {allCompletedTasks.length > 0 ? (
+                            allCompletedTasks.map((task: TaskType, index: any) => (
                                 <Flex
                                     borderBottom={'2px solid #FF0080'}
                                     w="100%"
