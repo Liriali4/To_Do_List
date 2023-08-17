@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Flex, Text, useDisclosure, } from '@chakra-ui/react'
-import { getData, saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
+import { saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
 import { TaskType } from '../../types/allTypes';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import Sidebar from '../../Components/sideBar';
@@ -17,11 +17,6 @@ export default function TaskList() {
 
     const setTasks = useTaskStore(state => state.setTasks);
     const tasks = useTaskStore(state => state.tasks);
-
-    useEffect(() => {
-        const tasks = getData(StorageEnum.Task) || [];
-        setTasks(tasks);
-    }, [setTasks]);
 
     function removetask(task: TaskType) {
         taskModule.deleteItem(task, tasks)

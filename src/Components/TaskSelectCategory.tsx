@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CategoryType } from "../types/allTypes";
 import { Flex, Text } from "@chakra-ui/react";
 import Select from 'react-select';
 import { useCategoryStore } from "../State/zustand";
-import { StorageEnum, getData } from "../DataBase/LocalStorageDao";
 
 interface SelectProps {
     value: any;
@@ -15,12 +14,6 @@ export default function TaskSelectCategories(props: SelectProps): JSX.Element {
     const {  value, placeholder, onChange } = props;
     
     const categories = useCategoryStore(state => state.categories);    
-    const setCategories = useCategoryStore(state => state.setCategories);
-
-    useEffect(() => {
-        const categories = getData(StorageEnum.Category) || [];
-        setCategories(categories)
-    }, [setCategories]);    
 
     const options = categories.map((name: CategoryType) => ({
         value: name.name,

@@ -1,5 +1,6 @@
 import create from 'zustand';
 import { CategoryType, TaskType } from '../types/allTypes';
+import { StorageEnum, getData } from '../DataBase/LocalStorageDao';
 
 type TaskStore = {
   tasks: TaskType[];
@@ -9,24 +10,24 @@ type TaskStore = {
 
 type CategoryStore = {
   categories: CategoryType[];
-  setCategories: (categories: CategoryType[]) => void; 
+  setCategories: (categories: CategoryType[]) => void;
   addCategory: (category: CategoryType) => void;
 };
 
 export const useTaskStore = create<TaskStore>((set) => ({
-  tasks: [],
+  tasks: getData(StorageEnum.Task) || [],
   addTask: (task) =>
-    set((state) => ({
-      tasks: [...state.tasks, task],
-    })),
-    setTasks: (tasks) =>
-      set((state) => ({
-        tasks,
-      })),
+  set((state) => ({
+    tasks: [...state.tasks, task],
+  })),
+  setTasks: (tasks) =>
+  set((state) => ({
+    tasks,
+  })),
 }));
 
 export const useCategoryStore = create<CategoryStore>((set) => ({
-  categories: [],
+  categories: getData(StorageEnum.Category) || [],
   setCategories: (categories) =>
     set((state) => ({
       categories,
@@ -36,5 +37,4 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
       categories: [...state.categories, category],
     })),
 }));
-
 
