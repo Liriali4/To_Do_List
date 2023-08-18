@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
-import { useCategoryModule } from "./useCategoryModule";
+import { useCategoryModule } from "./Repository/useCategoryModule";
 import { CategoryType } from "../../types/allTypes";
 
 export default function AddCategory(): JSX.Element {

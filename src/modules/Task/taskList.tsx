@@ -4,7 +4,7 @@ import { saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
 import { TaskType } from '../../types/allTypes';
 import { FiEdit, FiTrash } from 'react-icons/fi';
 import Sidebar from '../../Components/sideBar';
-import { useTaskModule } from './useTaskModule';
+import { useTaskModule } from './Repository/useTaskModule';
 import { useTaskStore } from '../../State/zustand';
 import ModalEditTask from './ModalEditTask';
 

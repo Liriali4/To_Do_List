@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { CategoryType } from '../../types/allTypes';
-import { ItemModuleContract } from '../../Contracts/conctract';
-import { useCategoryStore } from '../../State/zustand';
-import { AddCategoryDao, DeleteAllCategoriesDao, DeleteCategoryDao, EditCategoryDao } from './Dao/CategoryDao';
+import { CategoryType } from '../../../types/allTypes';
+import { ItemModuleContract } from '../../../Contracts/conctract';
+import { useCategoryStore } from '../../../State/zustand';
+import { AddCategoryDao, DeleteAllCategoriesDao, DeleteCategoryDao, EditCategoryDao, GetAllCategoriesDao } from '../Dao/CategoryDao';
 
 export function useCategoryModule(): ItemModuleContract<CategoryType> {
     const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -37,11 +37,9 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
         setCategoriesState(categoreisWithoutDeleted);
     };
 
-
     const deleteAllItens = (key: string) => {
         DeleteAllCategoriesDao(key)
     }
-
 
     return {
         addItem,
@@ -49,4 +47,9 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
         deleteItem,
         deleteAllItens,
     };
+}
+
+
+export default function getAllCategories() {
+    return GetAllCategoriesDao();
 }

@@ -3,7 +3,7 @@ import { Text, Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { StorageEnum } from "../../DataBase/LocalStorageDao";
 import { CategoryType } from "../../types/allTypes";
 import { FiEdit, FiTrash } from "react-icons/fi";
-import { useCategoryModule } from "./useCategoryModule";
+import { useCategoryModule } from "./Repository/useCategoryModule";
 import { useCategoryStore } from "../../State/zustand";
 import ModalEditCategory from "./ModalEditCategory";
 

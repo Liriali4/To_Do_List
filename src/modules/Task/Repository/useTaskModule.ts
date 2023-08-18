@@ -1,7 +1,7 @@
-import { TaskType } from '../../types/allTypes';
-import { ItemModuleContract } from '../../Contracts/conctract';
-import { useCompletedTaskStore, useTaskStore } from '../../State/zustand';
-import { AddTaskDao, DeleteAllTasksDao, DeleteTaskDao, EditTaskDao, SaveDeletedTaskOnHistoric } from './Dao/TaskDao';
+import { TaskType } from '../../../types/allTypes';
+import { ItemModuleContract } from '../../../Contracts/conctract';
+import { useCompletedTaskStore, useTaskStore } from '../../../State/zustand';
+import { AddTaskDao, DeleteAllTasksDao, DeleteTaskDao, EditTaskDao, GetAllTasksDao, SaveDeletedTaskOnHistoric } from '../Dao/TaskDao';
 
 export function useTaskModule(): ItemModuleContract<TaskType> {
 
@@ -43,4 +43,8 @@ export function useTaskModule(): ItemModuleContract<TaskType> {
     deleteItem,
     deleteAllItens,
   };
+}
+
+export default function getAllTasks() {
+  return GetAllTasksDao();
 }

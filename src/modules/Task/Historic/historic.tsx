@@ -5,7 +5,7 @@ import { TaskType } from '../../../types/allTypes';
 import { FiTrash } from 'react-icons/fi';
 import Sidebar from '../../../Components/sideBar';
 import { useCompletedTaskStore } from '../../../State/zustand';
-import { useTaskModule } from '../useTaskModule';
+import { useTaskModule } from '../Repository/useTaskModule';
 
 export default function Historic() {
 

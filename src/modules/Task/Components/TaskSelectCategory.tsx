@@ -1,8 +1,8 @@
 import React from "react";
-import { CategoryType } from "../../types/allTypes";
+import { CategoryType } from "../../../types/allTypes";
 import { Flex, Text } from "@chakra-ui/react";
 import Select from 'react-select';
-import { useCategoryStore } from "../../State/zustand";
+import { useCategoryStore } from "../../../State/zustand";
 
 interface SelectProps {
     value: any;

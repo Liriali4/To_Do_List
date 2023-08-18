@@ -3,7 +3,7 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOve
 import TaskButton from "../../Components/TaskButton";
 import TaskInput from "../../Components/TaskInput";
 import { CategoryType } from "../../types/allTypes";
-import { useCategoryModule } from "./useCategoryModule";
+import { useCategoryModule } from "./Repository/useCategoryModule";
 
 interface ModalEditProps {
     isOpen: boolean;

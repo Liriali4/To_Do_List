@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
-import { useTaskModule } from "./useTaskModule";
+import { useTaskModule } from "./Repository/useTaskModule";
 import { TaskType } from "../../types/allTypes";
 import Sidebar from "../../Components/sideBar";
-import TaskSelectCategories from "./TaskSelectCategory";
+import TaskSelectCategories from "./Components/TaskSelectCategory";
 
 export default function AddTask(): JSX.Element {
     const [newTask, setNewTask] = useState('');

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, Box, Flex } from "@chakra-ui/react";
 import TaskButton from "../../Components/TaskButton";
 import TaskInput from "../../Components/TaskInput";
-import TaskSelectCategories from "./TaskSelectCategory";
+import TaskSelectCategories from "./Components/TaskSelectCategory";
 import { TaskType } from "../../types/allTypes";
-import { useTaskModule } from "./useTaskModule";
+import { useTaskModule } from "./Repository/useTaskModule";
 
 interface ModalEditProps {
     isOpen: boolean;

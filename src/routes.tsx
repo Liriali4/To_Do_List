@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme } from './Themes/themes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -8,8 +8,18 @@ import Category from './modules/Category/category';
 import AddTask from './modules/Task/AddTask';
 import Historic from './modules/Task/Historic/historic';
 import TaskList from './modules/Task/TaskList';
+import { useCategoryStore, useTaskStore } from './State/zustand';
 
 export default function App(): JSX.Element {
+
+  const fetchCategories = useCategoryStore((state) => state.getAllCategories);
+  const fetchTasks = useTaskStore((state) => state.getAllTasks);
+
+  useEffect(() => {
+    fetchCategories();
+    fetchTasks()
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
