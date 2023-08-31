@@ -15,6 +15,8 @@ export default function TaskSelectCategories(props: SelectProps): JSX.Element {
     
     const categories = useCategoryStore(state => state.categories);    
 
+    console.log('rrrrenderizouuuuuu a catergoria', categories)
+    
     const options = categories.map((name: CategoryType) => ({
         value: name.name,
         label: name.name

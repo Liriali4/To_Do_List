@@ -49,16 +49,17 @@ export default function CategoryOfTask(): JSX.Element {
                     />
                 </Flex>
                 <Box >
-                    {categories.map((category: any, index: any) => (
+                    { categories ? categories.map((category: any, index: any) => (
                         <Flex
                             justify={'space-between'}
                             align={'center'}
                             p={'10px'}
                             borderBottom={'2px solid #FF0080'}
                             w={'100%'}
+                            key={index}
                         >
-                            <Text key={index}>{category.name}</Text>
-                            <Text key={index} fontStyle='italic'>{category.obs}</Text>
+                            <Text>{category.name}</Text>
+                            <Text fontStyle='italic'>{category.obs}</Text>
 
                             <Flex justify={'space-between'} w={'15%'}>
                                 <FiEdit
@@ -78,7 +79,7 @@ export default function CategoryOfTask(): JSX.Element {
                                 />
                             </Flex>
                         </Flex>
-                    ))}
+                    )) : null}
                 </Box>
             </Box>
             <ModalEditCategory

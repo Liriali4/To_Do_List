@@ -14,8 +14,10 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
     const addItem = (CategoryToAdd: CategoryType) => {
         setCategories([...categories, CategoryToAdd]);
 
+        let updatedCategories
+
         const existingCategories = allCategories;
-        const updatedCategories = [...existingCategories, CategoryToAdd];
+        existingCategories ?  updatedCategories = [...existingCategories, CategoryToAdd] :  updatedCategories = [...existingCategories, CategoryToAdd];
         AddCategoryDao(updatedCategories);
 
         categoriesState(CategoryToAdd)
