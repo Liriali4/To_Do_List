@@ -11,18 +11,18 @@ interface SelectProps {
 }
 
 export default function TaskSelectCategories(props: SelectProps): JSX.Element {
+    
     const {  value, placeholder, onChange } = props;
     
     const categories = useCategoryStore(state => state.categories);    
 
-    console.log('rrrrenderizouuuuuu a catergoria', categories)
+    console.log('Renderizou a catergoria', categories)
     
     const options = categories.map((name: CategoryType) => ({
         value: name.name,
         label: name.name
     }));    
     
-
     return (
         <Flex flexDir={'column'}>
             <Text mb={'15px'} fontSize={'16px'}>Selecione a categoria:</Text>

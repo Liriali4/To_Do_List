@@ -13,7 +13,6 @@ export default function AddTask(): JSX.Element {
 
     const taskModule = useTaskModule();
 
-    
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (newTask !== '' && CategoryOfTask !== null) {
