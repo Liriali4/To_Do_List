@@ -3,9 +3,11 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FiPlusSquare, FiLogOut } from 'react-icons/fi'
 import { TbHistoryToggle } from 'react-icons/tb'
+import { TiUserDeleteOutline } from "react-icons/ti";
 import { BiCategoryAlt } from 'react-icons/bi'
 import { GoTasklist } from 'react-icons/go'
-import { getData, StorageEnum } from "../DataBase/LocalStorageDao";
+import { deleteAll, getData, StorageEnum } from "../DataBase/LocalStorageDao";
+import { useCategoryStore, useCompletedTaskStore, useTaskStore } from "../State/zustand";
 
 
 export default function Sidebar() {
@@ -14,8 +16,20 @@ export default function Sidebar() {
     const location = useLocation();
     const User = getData(StorageEnum.User)
 
+    const setTasks = useTaskStore((state)=> state.setTasks)
+    const setCompletedTasks = useCompletedTaskStore((state)=> state.setCompletedTasks)
+    const setCategories = useCategoryStore((state)=> state.setCategories)
+
     function logout() {
         history("/");
+    }
+
+    function deleteUser() {
+        deleteAll();
+        setTasks([])
+        setCompletedTasks([])
+        setCategories([])
+        logout();
     }
 
     return (
@@ -185,6 +199,33 @@ export default function Sidebar() {
                         <Text
                             p="0 10px 0"
                         >Sair</Text>
+                    </Flex>
+                </Button>
+                <Button
+                    onClick={() => deleteUser()}
+                >
+                    <Flex
+                        display="flex"
+                        align="center"
+                        w="100%"
+                        h="45px"
+                        textDecoration="none"
+                        color="#FF0080"
+                        fontWeight="500"
+                        fontSize="16px"
+                        p="20px 20px 20px"
+                        _hover={{
+                            bg: "cinza.fundo",
+                            fontWeight: "700"
+                        }}
+                    >
+                        <TiUserDeleteOutline
+                            size={23}
+                            color="cinza.sidebar"
+                        />
+                        <Text
+                            p="0 10px 0"
+                        >Apagar conta</Text>
                     </Flex>
                 </Button>
             </Flex>
