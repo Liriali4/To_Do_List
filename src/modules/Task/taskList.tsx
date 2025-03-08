@@ -16,7 +16,7 @@ export default function TaskList() {
 
     const setTasks = useTaskStore(state => state.setTasks);
     const tasks = useTaskStore(state => state.tasks);
-
+    console.log(tasks)
     function removetask(task: TaskType) {
         taskModule.deleteItem(task, tasks)
     }

@@ -9,7 +9,7 @@ export function useCategoryModule(): ItemModuleContract<CategoryType> {
 
     const setCategoriesState = useCategoryStore(state => state.setCategories);
     const categoriesState = useCategoryStore(state => state.addCategory);
-    const allCategories = useCategoryStore(state => state.categories);
+    const allCategories = useCategoryStore(state => state.categories) || [];
 
     const addItem = (CategoryToAdd: CategoryType) => {
         setCategories([...categories, CategoryToAdd]);
