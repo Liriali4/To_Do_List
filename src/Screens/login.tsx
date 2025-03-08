@@ -1,14 +1,22 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserType } from "../types/allTypes";
 import TaskInput from "../Components/TaskInput";
 import TaskButton from "../Components/TaskButton";
-import { saveData, StorageEnum } from "../DataBase/LocalStorageDao";
+import { getData, saveData, StorageEnum } from "../DataBase/LocalStorageDao";
 
 export default function Login(): JSX.Element {
     const [user, setUser] = useState({ name: "" });
     const [userExist, setUserExist] = useState(false);
+
+    useEffect(()=>{
+        const storedUser = getData(StorageEnum.User);
+        if (storedUser && storedUser.name) {
+            setUser(storedUser);
+            setUserExist(true);
+        }
+    }, []);
 
     const navigation = useNavigate();
     function login() {
