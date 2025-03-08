@@ -69,7 +69,7 @@ export default function AddTask(): JSX.Element {
                 />
                 <TaskSelectCategories
                     value={CategoryOfTask}
-                    onChange={(e) => handleCategoryChange(e)}
+                    onChange={handleCategoryChange}
                 />
                 <Box
                     display={'flex'}
