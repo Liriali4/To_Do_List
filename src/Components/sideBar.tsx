@@ -1,16 +1,18 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import {  FiPlusSquare, FiLogOut } from 'react-icons/fi'
+import { FiPlusSquare, FiLogOut } from 'react-icons/fi'
 import { TbHistoryToggle } from 'react-icons/tb'
-import {BiCategoryAlt } from 'react-icons/bi'
-import {GoTasklist } from 'react-icons/go'
+import { BiCategoryAlt } from 'react-icons/bi'
+import { GoTasklist } from 'react-icons/go'
+import { getData, StorageEnum } from "../DataBase/LocalStorageDao";
 
 
 export default function Sidebar() {
 
     const history = useNavigate();
     const location = useLocation();
+    const User = getData(StorageEnum.User)
 
     function logout() {
         history("/");
@@ -41,7 +43,7 @@ export default function Sidebar() {
                     bgGradient='linear(to-l, #7928CA, #FF0080)'
                     bgClip='text'
                     fontWeight='bold'
-                >Task Maneger</Text>
+                >{User.name}</Text>
             </Flex>
             <Flex
                 display="flex"
@@ -109,7 +111,7 @@ export default function Sidebar() {
                         display="flex"
                         align="center"
                         w="100%"
-                        h="45px"  
+                        h="45px"
                         textDecoration="none"
                         color={location.pathname === "/addtask" ? " #FF0080" : "#FF0080"}
                         bg={location.pathname === "/addtask" ? "rgb(235, 235, 235)" : ""}
@@ -137,7 +139,7 @@ export default function Sidebar() {
                         display="flex"
                         align="center"
                         w="100%"
-                        h="45px"  
+                        h="45px"
                         textDecoration="none"
                         color={location.pathname === "/historicoftasks" ? " #FF0080" : "#FF0080"}
                         bg={location.pathname === "/historicoftasks" ? "rgb(235, 235, 235)" : ""}
@@ -159,7 +161,7 @@ export default function Sidebar() {
                     </Flex>
                 </Link>
                 <Button
-                    onClick={() => logout()}                 
+                    onClick={() => logout()}
                 >
                     <Flex
                         display="flex"

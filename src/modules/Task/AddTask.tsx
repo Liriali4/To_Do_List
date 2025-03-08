@@ -4,7 +4,6 @@ import TaskInput from "../../Components/TaskInput";
 import TaskButton from "../../Components/TaskButton";
 import { useTaskModule } from "./Repository/useTaskModule";
 import { TaskType } from "../../types/allTypes";
-import Sidebar from "../../Components/sideBar";
 import TaskSelectCategories from "./Components/TaskSelectCategory";
 
 export default function AddTask(): JSX.Element {
@@ -40,58 +39,50 @@ export default function AddTask(): JSX.Element {
     };
 
     return (
-        <Box
-            w={'100%'}
+        <Flex
+            ml={'15%'}
             h={'100vh'}
-            bg={'cinza.fundo'}
-
+            flexDir={'column'}
+            justify={'center'}
+            align={'center'}
         >
-            <Sidebar />
             <Flex
-                ml={'15%'}
-                h={'100vh'}
                 flexDir={'column'}
-                justify={'center'}
-                align={'center'}
+                justify={'space-around'}
+                borderRadius={'10px'}
+                boxShadow="2px 2px #ddd"
+                p={'15px'}
+                w={'460px'}
+                h={'460px'}
+                bg={'branco.unico'}
             >
-                <Flex
-                    flexDir={'column'}
-                    justify={'space-around'}
-                    borderRadius={'10px'}
-                    boxShadow="2px 2px #ddd"
-                    p={'15px'}
-                    w={'460px'}
-                    h={'460px'}
-                    bg={'branco.unico'}
+                <Text
+                    fontSize={'24px'}
+                    fontWeight={'600'}
+                    color={'roxo.escuro'}
                 >
-                    <Text
-                        fontSize={'24px'}
-                        fontWeight={'600'}
-                        color={'roxo.escuro'}
-                    >
-                        Adicione uma nova Tarefa.</Text>
-                    <TaskInput
-                        label="O que você tem a fazer?"
-                        onChange={handleTaskChange}
-                        value={newTask}
+                    Adicione uma nova Tarefa.</Text>
+                <TaskInput
+                    label="O que você tem a fazer?"
+                    onChange={handleTaskChange}
+                    value={newTask}
+                />
+                <TaskSelectCategories
+                    value={CategoryOfTask}
+                    onChange={(e) => handleCategoryChange(e)}
+                />
+                <Box
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignContent={"center"}
+                    w={'100%'}
+                >
+                    <TaskButton
+                        label="Add Task"
+                        onClick={handleSubmit}
                     />
-                    <TaskSelectCategories
-                        value={CategoryOfTask}
-                        onChange={(e) => handleCategoryChange(e)}
-                    />
-                    <Box
-                        display={'flex'}
-                        justifyContent={'center'}
-                        alignContent={"center"}
-                        w={'100%'}
-                    >
-                        <TaskButton
-                            label="Add Task"
-                            onClick={handleSubmit}
-                        />
-                    </Box>
-                </Flex>
+                </Box>
             </Flex>
-        </Box>
+        </Flex>
     )
 }

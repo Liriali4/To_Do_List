@@ -9,6 +9,8 @@ import AddTask from './modules/Task/AddTask';
 import Historic from './modules/Task/Historic/historic';
 import { useCategoryStore, useTaskStore } from './State/zustand';
 import TaskList from './modules/Task/taskList';
+import BaseLayout from './Components/BaseLayout';
+import TaskManagerRoutes from './routes/routes';
 
 export default function App(): JSX.Element {
 
@@ -22,16 +24,7 @@ export default function App(): JSX.Element {
 
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path={'/'} element={<Login />} />
-          <Route path={'/home'} element={<TaskList />} />
-          <Route path={'/addcategory'} element={<Category />} />
-          <Route path={'/addtask'} element={<AddTask />} />
-          <Route path={'/historicoftasks'} element={<Historic />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <TaskManagerRoutes/>
     </ChakraProvider>
   );
 }

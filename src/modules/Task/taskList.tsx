@@ -3,7 +3,6 @@ import { Box, Flex, Text, useDisclosure, } from '@chakra-ui/react'
 import { saveData, StorageEnum } from '../../DataBase/LocalStorageDao';
 import { TaskType } from '../../types/allTypes';
 import { FiEdit, FiTrash } from 'react-icons/fi';
-import Sidebar from '../../Components/sideBar';
 import { useTaskModule } from './Repository/useTaskModule';
 import { useTaskStore } from '../../State/zustand';
 import ModalEditTask from './ModalEditTask';
@@ -32,37 +31,31 @@ export default function TaskList() {
 
     return (
         <>
-            <Box
-                w={'100%'}
+            <Flex
+                ml={'15%'}
                 h={'100vh'}
-                bg={'cinza.fundo'}
+                flexDir={'column'}
+                justify={'center'}
+                align={'center'}
             >
-                <Sidebar />
-                <Flex
-                    ml={'15%'}
-                    h={'100vh'}
-                    flexDir={'column'}
-                    justify={'center'}
-                    align={'center'}
+                <Box
+                    borderRadius={'10px'}
+                    boxShadow="2px 2px #ddd"
+                    bg={'branco.unico'}
+                    w={'750px'}
+                    h={'650px'}
+                    p={'20px'}
                 >
+                    <Text
+                        fontSize={'28px'}
+                        fontWeight={'600'}
+                        color={'roxo.escuro'}
+                        m={'10px 0'}
+                    >Lista de tarefas:</Text>
                     <Box
-                        borderRadius={'10px'}
-                        boxShadow="2px 2px #ddd"
-                        bg={'branco.unico'}
-                        w={'750px'}
-                        h={'650px'}
-                        p={'20px'}
+                        w={'100%'}
                     >
-                        <Text
-                            fontSize={'28px'}
-                            fontWeight={'600'}
-                            color={'roxo.escuro'}
-                            m={'10px 0'}
-                        >Lista de tarefas:</Text>
-                        <Box
-                            w={'100%'}
-                        >
-                            { tasks && tasks.length > 0
+                        {tasks && tasks.length > 0
                             ?
                             tasks.map((task: TaskType, index: any) => (
                                 <Flex
@@ -130,15 +123,14 @@ export default function TaskList() {
                                     </Flex>
                                 </Flex>
                             ))
-                        :
-                        <Flex>
-                            <Text>Sem tarefas</Text>
-                        </Flex>
+                            :
+                            <Flex>
+                                <Text>Sem tarefas</Text>
+                            </Flex>
                         }
-                        </Box>
                     </Box>
-                </Flex>
-            </Box>
+                </Box>
+            </Flex>
             <ModalEditTask
                 isOpen={isOpen}
                 onClose={onClose}

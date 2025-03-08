@@ -8,23 +8,16 @@ import Sidebar from '../../Components/sideBar';
 export default function Category() {
 
     return (
-        <Box
-            w={'100%'}
-            h={'100vh'}
-            bg={'cinza.fundo'}
 
+        <Flex
+            ml={'20%'}
+            h={'100vh'}
+            justify={'center'}
+            align={'center'}
         >
-            <Sidebar />
-            <Flex
-                ml={'20%'}
-                h={'100vh'}
-                justify={'center'}
-                align={'center'}
-            >
-                <Box w={'50%'} pl={'50px'} pt={'40px'}> <AddCategory /></Box>
-                <Box w={'50%'} pl={'50px'} pt={'40px'}> <CategoryOfTask /></Box>
-            </Flex>
-        </Box>
+            <Box w={'50%'} pl={'50px'} pt={'40px'}> <AddCategory /></Box>
+            <Box w={'50%'} pl={'50px'} pt={'40px'}> <CategoryOfTask /></Box>
+        </Flex>
     );
 }
 
