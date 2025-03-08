@@ -62,7 +62,9 @@ export default function TaskList() {
                         <Box
                             w={'100%'}
                         >
-                            {tasks.map((task: TaskType, index: any) => (
+                            { tasks && tasks.length > 0
+                            ?
+                            tasks.map((task: TaskType, index: any) => (
                                 <Flex
                                     borderBottom={'2px solid #FF0080'}
                                     w="100%"
@@ -127,7 +129,12 @@ export default function TaskList() {
                                         />
                                     </Flex>
                                 </Flex>
-                            ))}
+                            ))
+                        :
+                        <Flex>
+                            <Text>Sem tarefas</Text>
+                        </Flex>
+                        }
                         </Box>
                     </Box>
                 </Flex>

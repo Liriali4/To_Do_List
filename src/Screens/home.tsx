@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
 import Sidebar from "../Components/sideBar";
-import TaskList from "../modules/Task/TaskList";
+import TaskList from "../modules/Task/taskList";
 
 
 export default function Home(): JSX.Element {

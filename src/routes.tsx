@@ -7,8 +7,8 @@ import PageNotFound from './Screens/PageNotFound';
 import Category from './modules/Category/category';
 import AddTask from './modules/Task/AddTask';
 import Historic from './modules/Task/Historic/historic';
-import TaskList from './modules/Task/TaskList';
 import { useCategoryStore, useTaskStore } from './State/zustand';
+import TaskList from './modules/Task/taskList';
 
 export default function App(): JSX.Element {
 
