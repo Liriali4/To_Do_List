@@ -41,7 +41,7 @@ export default function Sidebar() {
                     bgGradient='linear(to-l, #7928CA, #FF0080)'
                     bgClip='text'
                     fontWeight='bold'
-                >Líria Li4</Text>
+                >Task Maneger</Text>
             </Flex>
             <Flex
                 display="flex"

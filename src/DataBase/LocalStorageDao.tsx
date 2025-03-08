@@ -4,6 +4,7 @@ export enum StorageEnum {
 	Task = 'tarefas',
 	Category = 'categorias',
 	CompletedTask = 'tarefasfeitas',
+	User= 'user'
 }
 
 export function saveData(key: string, data: any) {

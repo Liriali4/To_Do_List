@@ -10,3 +10,7 @@ export type CategoryType = {
   name: string;
   obs: string;
 };
+
+export type UserType = {
+  name: string;
+}

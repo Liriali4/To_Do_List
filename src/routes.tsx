@@ -29,7 +29,6 @@ export default function App(): JSX.Element {
           <Route path={'/addcategory'} element={<Category />} />
           <Route path={'/addtask'} element={<AddTask />} />
           <Route path={'/historicoftasks'} element={<Historic />} />
-
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
